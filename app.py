@@ -6,7 +6,7 @@ app.secret_key = 'your_secret_key_here'  # Diperlukan untuk flash messages
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 @app.route('/kalkulator_matematika', methods=['GET', 'POST'])
 def kalkulator_matematika():
