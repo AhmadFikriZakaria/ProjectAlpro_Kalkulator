@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            
+            font-family: Arial, sans-serif; /* mengatur font halaman*/
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .Kurus {
+            background-color: #FFE0B2;
+        }
+
+        .normal {
+            background-color: #C8E6C9;
+        }
+
+        .gendut {
+            background-color: #FFCDD2;
+        }
+
+        .obesitas {
+            background-color: #EF9A9A;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Kalkulator BMI</h1>
+        <form method="POST">
+            <input type="number" name="berat" placeholder="Berat Badan (kg)" required step="0.1">
+            <input type="number" name="tinggi" placeholder="Tinggi Badan (cm)" required step="0.1">
+            <h6>Berat dan tinggi dalam bilangan positif</h6>
+            <button type="submit">Hitung BMI</button>
+        </form>
+        {% if bmi is not none %}
+        <div class="hasil {% if kategori == 'Kurus Kerempeng' %}Kurus
+                            {% elif kategori == 'Normal' %}Normal
+                            {% elif kategori == 'Gendut' %}Gendut
+                            {% else %}obesitas{% endif %}">
+            <p>BMI Anda: {{ "%.1f"|format(bmi) }}</p>
+            <p>Kategori: {{ kategori }}</p>
+        </div>
+        {% endif %}
+        <a href="/" class="back-link">Kembali ke Home</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="error-message">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</body>
+
+</html>

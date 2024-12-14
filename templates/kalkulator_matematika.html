@@ -1,0 +1,110 @@
+<!-- templates/kalkulator_matematika.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Matematika</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Kalkulator Matematika Dasar</h1>
+        <form method="POST">
+            <input type="number" name="angka1" placeholder="Angka Pertama" required>
+            <input type="number" name="angka2" placeholder="Angka Kedua" required>
+            <select name="operasi" required>
+                <option value="tambah">Tambah (+)</option>
+                <option value="kurang">Kurang (-)</option>
+                <option value="kali">Kali (×)</option>
+                <option value="bagi">Bagi (÷)</option>
+            </select>
+            <button type="submit">Hitung</button>
+        </form>
+        {% if hasil is not none %}
+        <div class="hasil">
+            Hasil: {{ "%.2f"|format(hasil) }}
+        </div>
+        {% endif %}
+        <a href="/" class="back-link">Kembali ke Home</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="error-message">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</body>
+
+</html>
